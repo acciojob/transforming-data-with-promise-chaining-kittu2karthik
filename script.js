@@ -31,13 +31,14 @@ async function print(num) {
   await delay(6);
   num += 10;
   const p5 = document.createElement('p');
-  p5.textContent = `Final Result: ${num}`;
+  p5.textContent = `Final Result: ${num}`; // Changed to "Final Result"
   output.appendChild(p5);
 }
 
 btn.addEventListener('click', () => {
   const number = parseFloat(document.querySelector('#ip').value);
   if (isNaN(number)) {
+    alert('Please enter a valid number!');
     return;
   }
   print(number);
