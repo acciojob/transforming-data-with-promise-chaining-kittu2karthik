@@ -7,35 +7,39 @@ function delay(time) {
   });
 }
 
-async function print(num) {
-  output.innerHTML = '';
-  await delay(2);
-  const p = document.createElement('p');
-  p.textContent = `Result: ${num}`;
-  output.appendChild(p);
-	
-  await delay(1);
-  num *= 2;
-  p.textContent = `Result: ${num}`;
-	
-  await delay(1);
-  num -= 3;
-  p.textContent = `Result: ${num}`;
 
-  await delay(1);
-  num /= 2;
-  p.textContent = `Result: ${num}`;
-
-  await delay(1);
-  num += 10;
-  p.textContent = `Final Result: ${num}`; 
-}
 
 btn.addEventListener('click', () => {
-  const number = parseFloat(document.querySelector('#ip').value);
+	let number = parseFloat(document.querySelector('#ip').value);
   if (isNaN(number)) {
-    alert('Please enter a valid number!');
     return;
   }
-  print(number);
+	const p = document.createElement('p');
+	output.appendChild(p);
+
+	delay(2)
+	.then((res) => {
+		p.textContent = `Result: ${number}`;
+		return delay(2);
+	})
+	.then((res) => {
+		number *= 2;
+		p.textContent = `Result: ${number}`;
+		return delay(1);
+	})
+	.then((res) => {
+		number -= 3;
+		p.textContent = `Result: ${number}`;
+		return delay(1);
+	})
+	.then((res) => {
+		number /= 2;
+		p.textContent = `Result: ${number}`;
+		return delay(1);
+	})
+	.then((res) => {
+		number += 10;
+		p.textContent = `Final Result: ${number}`;
+	})
+
 });
